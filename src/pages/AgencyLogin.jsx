@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import "./AgencyLogin.css"; // استدعاء ملف CSS
 
 export default function AgencyLogin() {
   const [email, setEmail] = useState("");
@@ -25,9 +26,9 @@ export default function AgencyLogin() {
 
       // التوجيه حسب الدور
       if (data.role === "agency") {
-        navigate("/agency-dashboard"); // الوكالة تذهب مباشرة للـ BookingForm
+        navigate("/agency-dashboard"); 
       } else {
-        navigate("/booking-choice"); // الزبون العادي
+        navigate("/booking-choice"); 
       }
 
     } catch (err) {
@@ -37,13 +38,44 @@ export default function AgencyLogin() {
   };
 
   return (
-    <div className="container py-5">
-      <h2 className="text-center mb-4">تسجيل دخول الوكالة</h2>
-      <form onSubmit={handleLogin} className="mx-auto" style={{ maxWidth: "400px" }}>
-        <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="البريد الإلكتروني" className="form-control mb-2" required />
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="كلمة المرور" className="form-control mb-3" required />
-        <button type="submit" className="btn btn-primary w-100">تسجيل الدخول</button>
-      </form>
+    <div className="login-container d-flex justify-content-center align-items-center">
+      <div className="login-card shadow-lg p-4">
+        <h2 className="text-center mb-4">تسجيل دخول الوكالة</h2>
+        <form onSubmit={handleLogin}>
+          <div className="form-group mb-3">
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="البريد الإلكتروني"
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group mb-4">
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="كلمة المرور"
+              className="form-control"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">
+            تسجيل الدخول
+          </button>
+        </form>
+        <div className="text-center mt-3">
+          <p className="mb-0">ما عندكش حساب؟</p>
+          <button 
+            className="btn btn-outline-secondary mt-2 w-100"
+            onClick={() => navigate("/register")}
+          >
+            إنشاء حساب جديد
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

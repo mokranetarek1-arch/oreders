@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
+import "./Register.css"; // ملف التنسيقات
 
 export default function Register({ role = "agency" }) {
   const [email, setEmail] = useState("");
@@ -25,11 +26,10 @@ export default function Register({ role = "agency" }) {
         createdAt: new Date()
       });
 
-      // توجيه تلقائي حسب الدور
       if (role === "agency") {
-        navigate("/booking");  // الوكالات تذهب مباشرة للـ BookingForm
+        navigate("/booking");
       } else {
-        navigate("/booking-form"); // الزبائن العاديين
+        navigate("/booking-form");
       }
 
     } catch (err) {
@@ -39,12 +39,64 @@ export default function Register({ role = "agency" }) {
   };
 
   return (
-    <form onSubmit={handleRegister} style={{ maxWidth: 400, margin: "0 auto" }}>
-      <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder="الاسم" required />
-      <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="البريد الإلكتروني" required />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="كلمة المرور" required />
-      <input type="tel" value={phone} onChange={e => setPhone(e.target.value)} placeholder="رقم الهاتف" required />
-      <button type="submit">تسجيل</button>
-    </form>
+    <div className="register-container d-flex justify-content-center align-items-center">
+      <div className="register-card shadow-lg p-4">
+        <h2 className="text-center mb-4">إنشاء حساب جديد</h2>
+        <form onSubmit={handleRegister}>
+          <div className="form-group mb-3">
+            <input
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              placeholder="الاسم الكامل"
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group mb-3">
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="البريد الإلكتروني"
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group mb-3">
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="كلمة المرور"
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group mb-4">
+            <input
+              type="tel"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
+              placeholder="رقم الهاتف"
+              className="form-control"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-success w-100">
+            إنشاء الحساب
+          </button>
+        </form>
+        <div className="text-center mt-3">
+          <p className="mb-0">عندك حساب بالفعل؟</p>
+          <button
+            className="btn btn-outline-primary mt-2 w-100"
+            onClick={() => navigate("/login")}
+          >
+            تسجيل الدخول
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
