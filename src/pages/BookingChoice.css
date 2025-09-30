@@ -1,0 +1,88 @@
+/* BookingChoice.css */
+
+/* الحاوية الخاصة بالشاحنة */
+.truck-container {
+  position: relative;
+  height: 150px; /* ارتفاع المنطقة التي تتحرك فيها الشاحنة */
+  overflow: hidden;
+  margin-top: 40px;
+}
+
+/* الشاحنة */
+.truck {
+  position: absolute;
+  bottom: 0;
+  width: 190px;
+  transition: filter 0.3s;
+  animation: drive 10s linear infinite;
+
+  /* اجعل الشاحنة بيضاء بالكامل */
+  filter: brightness(0) invert(1);
+}
+
+/* إذا كانت اللغة عربية (RTL) */
+.truck.rtl {
+  animation-name: drive-rtl;
+}
+
+/* حركة الشاحنة من اليسار لليمين */
+@keyframes drive {
+  0% { left: -150px; }
+  100% { left: 100%; }
+}
+
+/* حركة الشاحنة من اليمين لليسار */
+@keyframes drive-rtl {
+  0% { right: -150px; }
+  100% { right: 100%; }
+}
+
+/* Glow عند hover */
+.truck:hover {
+  filter: brightness(0) invert(1) drop-shadow(0 0 15px #3bc5f3) drop-shadow(0 0 20px #3bc5f3);
+}
+
+/* تصميم الأزرار */
+.booking-btn {
+  border: none;
+  padding: 25px 40px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin: 10px;
+}
+
+/* أزرار الزبون */
+.booking-btn.customer {
+  background-color: #fff;
+  color: #003A54;
+}
+
+/* أزرار الوكالة */
+.booking-btn.agency {
+  background-color: #fff;
+  color: #3BC5F3;
+}
+
+/* تأثير hover على الأزرار */
+.booking-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .truck-container {
+    height: 120px;
+  }
+  .truck {
+    width: 90px;
+  }
+  .booking-btn {
+    padding: 20px 30px;
+    font-size: 18px;
+  }
+}

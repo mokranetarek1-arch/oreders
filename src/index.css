@@ -1,0 +1,93 @@
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap');
+
+:root{
+  --primary: #0d6efd;
+  --accent: #00b894;
+  --dark: #2d3436;
+  --muted:#6c757d;
+  --bg: #f8f9fa;
+  --card-radius: 14px;
+}
+
+/* Global */
+body{
+  font-family: 'Tajawal', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Container tweaks */
+.container {
+  max-width: 1100px;
+}
+
+/* Cards look */
+.card.custom {
+  border-radius: var(--card-radius);
+  border: none;
+  box-shadow: 0 8px 18px rgba(13, 14, 20, 0.06);
+}
+
+/* Hero */
+.hero {
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.hero-overlay{
+  background: rgba(0,0,0,0.35);
+  padding: 60px 30px;
+}
+.hero h1{
+  font-size: 2.4rem;
+  font-weight:700;
+}
+.hero p{ color: #e8eefc; font-size:1.05rem; }
+
+/* CTA buttons */
+.btn-primary{
+  background: linear-gradient(90deg, var(--primary), #0069d9);
+  border: none;
+  box-shadow: 0 6px 18px rgba(13,110,253,0.18);
+}
+.btn-accent{
+  background: var(--accent);
+  border: none;
+}
+
+/* Service cards */
+.service-card {
+  transition: transform .18s ease, box-shadow .18s ease;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.service-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(13, 14, 20, 0.06);
+}
+
+/* Status badges */
+.badge-pending{ background:#ffd43b; color:#222; }
+.badge-accepted{ background:#339af0; color:#fff; }
+.badge-done{ background:#2dd4bf; color:#fff; }
+
+/* Footer */
+.site-footer{
+  background:#fff;
+  padding: 30px 0;
+  border-top: 1px solid #e9ecef;
+  margin-top: 40px;
+  color: var(--muted);
+}
+
+/* Responsive tweaks */
+@media (max-width:768px){
+  .hero-overlay{ padding: 30px 18px; }
+  .hero h1{ font-size: 1.6rem; }
+}
