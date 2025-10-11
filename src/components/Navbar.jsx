@@ -22,6 +22,7 @@ export default function AppNavbar() {
   const links = [
     { path: "/", labelFR: "Accueil", labelAR: "الرئيسية", labelEN: "Home", icon: <FaHome size={20} /> },
     { path: "/booking-choice", labelFR: "Réservation", labelAR: "الحجز", labelEN: "Booking", icon: <FaCalendarAlt size={20} /> },
+    { path: "/market", labelFR: "Marché", labelAR: "السوق", labelEN: "Market", icon: <FaGlobe size={20} /> }, // ✅ الرابط الجديد
     { path: "/about", labelFR: "À propos", labelAR: "من نحن", labelEN: "About", icon: <FaInfoCircle size={20} /> },
     { path: "/contact", labelFR: "Contact", labelAR: "اتصل بنا", labelEN: "Contact", icon: <FaPhone size={20} /> },
   ];
