@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './ProductDetail.css';
+import "./ProductDetail.css";
 
 const wilayas = [
   "01-Adrar","02-Chlef","03-Laghouat","04-Oum El Bouaghi","05-Batna","06-Béjaïa",
@@ -16,7 +16,8 @@ const wilayas = [
   "31-Oran","32-El Bayadh","33-Illizi","34-Bordj Bou Arreridj","35-Boumerdès",
   "36-El Tarf","37-Tindouf","38-Tissemsilt","39-El Oued","40-Khenchela","41-Souk Ahras",
   "42-Tipaza","43-Mila","44-Aïn Defla","45-Naâma","46-Aïn Témouchent","47-Ghardaïa",
-  "48-Relizane"
+  "48-Relizane","49-Timimoun","50-Bordj Badji Mokhtar","51-Ouled Djellal","52-Béni Abbès",
+  "53-In Salah","54-In Guezzam","55-Touggourt","56-Djanet","57-El M'Ghair","58-El Meniaa" 
 ];
 
 const ProductDetail = () => {
@@ -28,7 +29,6 @@ const ProductDetail = () => {
   const [adresse, setAdresse] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [fullName, setFullName] = useState("");
-  const [deliveryPrice, setDeliveryPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [message, setMessage] = useState("");
 
@@ -43,14 +43,8 @@ const ProductDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    if (!wilaya) setDeliveryPrice(0);
-    else if (wilaya === "Algiers") setDeliveryPrice(400);
-    else setDeliveryPrice(1000);
-  }, [wilaya]);
-
-  useEffect(() => {
-    if (product) setTotalPrice(product.price * quantity + deliveryPrice);
-  }, [quantity, deliveryPrice, product]);
+    if (product) setTotalPrice(product.price * quantity);
+  }, [quantity, product]);
 
   const incrementQuantity = () => setQuantity(prev => prev + 1);
   const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
@@ -71,17 +65,16 @@ const ProductDetail = () => {
         adresse,
         phoneNumber,
         clientName: fullName,
-        deliveryPrice: Number(deliveryPrice),
         totalPrice: Number(totalPrice),
         status: "pending",
         createdAt: serverTimestamp(),
       });
+
       setQuantity(1);
       setWilaya("");
       setAdresse("");
       setPhoneNumber("");
       setFullName("");
-      setDeliveryPrice(0);
       setTotalPrice(0);
       alert(`✅ شكرًا ${fullName} على شرائك ${product.name}! طلبك تم إرساله بنجاح.`);
       setMessage("");
@@ -106,7 +99,7 @@ const ProductDetail = () => {
   return (
     <div className="product-detail-container container mt-5">
       <div className="row shadow-lg p-4 rounded bg-light">
-        {/* الصور */}
+        {/* صور المنتج */}
         <div className="col-md-6 mb-4 mb-md-0 text-center">
           <div className="product-slider-wrapper">
             {product.imageURLs && product.imageURLs.length > 0 ? (
@@ -124,14 +117,14 @@ const ProductDetail = () => {
             )}
           </div>
 
-          {/* تفاصيل المنتج تظهر عند hover */}
-          <div className="product-info-hover">
+          {/* وصف المنتج */}
+          <div className="product-info-hover mt-3">
             <h5>تفاصيل المنتج</h5>
             <p>{product.description}</p>
           </div>
         </div>
 
-        {/* تفاصيل الطلب */}
+        {/* نموذج الطلب */}
         <div className="col-md-6">
           <h2 className="mb-3">{product.name}</h2>
           <h4 className="text-primary mb-4">{product.price.toLocaleString()} دج</h4>
@@ -140,21 +133,25 @@ const ProductDetail = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label fw-bold">الاسم الكامل</label>
-              <input type="text" className="form-control shadow-sm" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="ادخل اسمك الكامل" required />
+              <input type="text" className="form-control shadow-sm"
+                value={fullName} onChange={(e) => setFullName(e.target.value)}
+                placeholder="ادخل اسمك الكامل" required />
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">الكمية</label>
               <div className="d-flex align-items-center">
                 <button type="button" className="btn btn-outline-secondary" onClick={decrementQuantity}>-</button>
-                <input type="text" className="form-control text-center mx-2" value={quantity} readOnly style={{ maxWidth: "80px" }} />
+                <input type="text" className="form-control text-center mx-2"
+                  value={quantity} readOnly style={{ maxWidth: "80px" }} />
                 <button type="button" className="btn btn-outline-secondary" onClick={incrementQuantity}>+</button>
               </div>
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">الولاية</label>
-              <select className="form-select shadow-sm" value={wilaya} onChange={(e) => setWilaya(e.target.value)} required>
+              <select className="form-select shadow-sm"
+                value={wilaya} onChange={(e) => setWilaya(e.target.value)} required>
                 <option value="">اختر الولاية</option>
                 {wilayas.map((w, index) => (<option key={index} value={w}>{w}</option>))}
               </select>
@@ -162,17 +159,14 @@ const ProductDetail = () => {
 
             <div className="mb-3">
               <label className="form-label fw-bold">العنوان</label>
-              <input type="text" className="form-control shadow-sm" value={adresse} onChange={(e) => setAdresse(e.target.value)} required />
+              <input type="text" className="form-control shadow-sm"
+                value={adresse} onChange={(e) => setAdresse(e.target.value)} required />
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">رقم الهاتف</label>
-              <input type="text" className="form-control shadow-sm" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
-            </div>
-
-            <div className="mb-3">
-              <label className="form-label fw-bold">سعر التوصيل (دج)</label>
-              <input type="number" className="form-control shadow-sm" value={deliveryPrice} readOnly />
+              <input type="text" className="form-control shadow-sm"
+                value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
             </div>
 
             <div className="mb-4">
@@ -180,7 +174,9 @@ const ProductDetail = () => {
               <input type="number" className="form-control shadow-sm" value={totalPrice} readOnly />
             </div>
 
-            <button type="submit" className="btn btn-success w-100 shadow-sm fw-bold">إرسال الطلب</button>
+            <button type="submit" className="btn btn-success w-100 shadow-sm fw-bold">
+              🛒 إرسال الطلب
+            </button>
           </form>
         </div>
       </div>
