@@ -8,7 +8,7 @@ import hero from "../assets/hero.png";
 import { useNavigate } from "react-router-dom"; 
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import './home.css'; // نحتاج CSS للcarousel وzoom
+import './Home.css'; // نحتاج CSS للcarousel وzoom
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
