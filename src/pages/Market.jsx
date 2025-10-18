@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
-import './market.css';
+import './Market.css';
 
 const Market = () => {
   const [products, setProducts] = useState([]);
