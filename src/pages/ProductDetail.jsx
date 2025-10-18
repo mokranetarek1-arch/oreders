@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './productDetail.css';
+import './ProductDetail.css';
 
 const wilayas = [
   "01-Adrar","02-Chlef","03-Laghouat","04-Oum El Bouaghi","05-Batna","06-Béjaïa",
