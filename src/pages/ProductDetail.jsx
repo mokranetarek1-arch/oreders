@@ -96,8 +96,8 @@ const ProductDetail = () => {
     arrows: true,
   };
 
-  // 👇 السعر القديم (إن وُجد)
-  const hasPromotion = product.oldPrice && product.oldPrice > product.price;
+  // 🧮 حساب السعر القديم تلقائيًا (20% أكثر)
+  const generatedOldPrice = Math.round(product.price * 1.2);
 
   return (
     <div className="product-detail-container container mt-5">
@@ -131,19 +131,15 @@ const ProductDetail = () => {
         <div className="col-md-6">
           <h2 className="mb-3">{product.name}</h2>
 
-          {/* 💰 عرض السعر بشكل جميل */}
+          {/* 💰 عرض السعر */}
           <div className="d-flex align-items-end mb-4">
-            {hasPromotion && (
-              <span className="text-muted text-decoration-line-through me-3 fs-5">
-                {product.oldPrice.toLocaleString()} دج
-              </span>
-            )}
+            <span className="text-muted text-decoration-line-through me-3 fs-5">
+              {generatedOldPrice.toLocaleString()} دج
+            </span>
             <span className="text-primary fw-bold fs-3">
               {product.price.toLocaleString()} دج
             </span>
-            {hasPromotion && (
-              <span className="badge bg-danger ms-3">عرض خاص 🔥</span>
-            )}
+            <span className="badge bg-danger ms-3">عرض خاص 🔥</span>
           </div>
 
           {/* 🚚 ملاحظة التوصيل */}
