@@ -96,8 +96,8 @@ const ProductDetail = () => {
     arrows: true,
   };
 
-  // 🧮 حساب السعر القديم تلقائيًا (20% أكثر)
   const generatedOldPrice = Math.round(product.price * 1.2);
+  const discountPercentage = Math.round(((generatedOldPrice - product.price) / generatedOldPrice) * 100);
 
   return (
     <div className="product-detail-container container mt-5">
@@ -105,7 +105,7 @@ const ProductDetail = () => {
         {/* صور المنتج */}
         <div className="col-md-6 mb-4 mb-md-0 text-center">
           <div className="product-slider-wrapper">
-            {product.imageURLs && product.imageURLs.length > 0 ? (
+            {product.imageURLs?.length > 0 ? (
               <Slider {...sliderSettings}>
                 {product.imageURLs.map((url, index) => (
                   <div key={index} className="slider-image-container">
@@ -114,35 +114,30 @@ const ProductDetail = () => {
                 ))}
               </Slider>
             ) : (
-              <div className="slider-image-container">
-                <img src={product.imageURL} alt={product.name} />
-              </div>
+              <img src={product.imageURL} alt={product.name} className="img-fluid rounded" />
             )}
           </div>
 
-          {/* وصف المنتج */}
           <div className="product-info-hover mt-3">
-            <h5>تفاصيل المنتج</h5>
+            <h5 className="fw-bold">📝 تفاصيل المنتج</h5>
             <p>{product.description}</p>
           </div>
         </div>
 
-        {/* نموذج الطلب */}
+        {/* تفاصيل المنتج + الطلب */}
         <div className="col-md-6">
-          <h2 className="mb-3">{product.name}</h2>
+          <h2 className="mb-3 fw-bold">{product.name}</h2>
 
-          {/* 💰 عرض السعر */}
-          <div className="d-flex align-items-end mb-4">
-            <span className="text-muted text-decoration-line-through me-3 fs-5">
-              {generatedOldPrice.toLocaleString()} دج
-            </span>
-            <span className="text-primary fw-bold fs-3">
-              {product.price.toLocaleString()} دج
-            </span>
-            <span className="badge bg-danger ms-3">عرض خاص 🔥</span>
+          {/* 💰 قسم السعر الاحترافي */}
+          <div className="price-box mb-4">
+            <div className="d-flex align-items-end flex-wrap">
+              <span className="old-price me-3">{generatedOldPrice.toLocaleString()} دج</span>
+              <span className="new-price">{product.price.toLocaleString()} دج</span>
+              <span className="discount-badge ms-3">-{discountPercentage}%</span>
+            </div>
+            <span className="special-offer-badge">🎉 عرض خاص لفترة محدودة</span>
           </div>
 
-          {/* 🚚 ملاحظة التوصيل */}
           <div className="alert alert-success py-2 mb-4 text-center">
             🚚 التوصيل متوفر في <strong>جميع ولايات الجزائر</strong>
           </div>
@@ -158,20 +153,13 @@ const ProductDetail = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="ادخل اسمك الكامل"
-                required
               />
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">الكمية</label>
               <div className="d-flex align-items-center">
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  onClick={decrementQuantity}
-                >
-                  -
-                </button>
+                <button type="button" className="btn btn-outline-secondary" onClick={decrementQuantity}>-</button>
                 <input
                   type="text"
                   className="form-control text-center mx-2"
@@ -179,13 +167,7 @@ const ProductDetail = () => {
                   readOnly
                   style={{ maxWidth: "80px" }}
                 />
-                <button
-                  type="button"
-                  className="btn btn-outline-secondary"
-                  onClick={incrementQuantity}
-                >
-                  +
-                </button>
+                <button type="button" className="btn btn-outline-secondary" onClick={incrementQuantity}>+</button>
               </div>
             </div>
 
@@ -195,13 +177,10 @@ const ProductDetail = () => {
                 className="form-select shadow-sm"
                 value={wilaya}
                 onChange={(e) => setWilaya(e.target.value)}
-                required
               >
                 <option value="">اختر الولاية</option>
                 {wilayas.map((w, index) => (
-                  <option key={index} value={w}>
-                    {w}
-                  </option>
+                  <option key={index} value={w}>{w}</option>
                 ))}
               </select>
             </div>
@@ -213,7 +192,6 @@ const ProductDetail = () => {
                 className="form-control shadow-sm"
                 value={adresse}
                 onChange={(e) => setAdresse(e.target.value)}
-                required
               />
             </div>
 
@@ -224,24 +202,15 @@ const ProductDetail = () => {
                 className="form-control shadow-sm"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                required
               />
             </div>
 
             <div className="mb-4">
               <label className="form-label fw-bold">المجموع الكلي (دج)</label>
-              <input
-                type="number"
-                className="form-control shadow-sm"
-                value={totalPrice}
-                readOnly
-              />
+              <input type="number" className="form-control shadow-sm" value={totalPrice} readOnly />
             </div>
 
-            <button
-              type="submit"
-              className="btn btn-success w-100 shadow-sm fw-bold"
-            >
+            <button type="submit" className="btn btn-success w-100 shadow-sm fw-bold">
               🛒 إرسال الطلب
             </button>
           </form>
