@@ -17,7 +17,7 @@ const wilayas = [
   "36-El Tarf","37-Tindouf","38-Tissemsilt","39-El Oued","40-Khenchela","41-Souk Ahras",
   "42-Tipaza","43-Mila","44-Aïn Defla","45-Naâma","46-Aïn Témouchent","47-Ghardaïa",
   "48-Relizane","49-Timimoun","50-Bordj Badji Mokhtar","51-Ouled Djellal","52-Béni Abbès",
-  "53-In Salah","54-In Guezzam","55-Touggourt","56-Djanet","57-El M'Ghair","58-El Meniaa" 
+  "53-In Salah","54-In Guezzam","55-Touggourt","56-Djanet","57-El M'Ghair","58-El Meniaa"
 ];
 
 const ProductDetail = () => {
@@ -96,6 +96,9 @@ const ProductDetail = () => {
     arrows: true,
   };
 
+  // 👇 السعر القديم (إن وُجد)
+  const hasPromotion = product.oldPrice && product.oldPrice > product.price;
+
   return (
     <div className="product-detail-container container mt-5">
       <div className="row shadow-lg p-4 rounded bg-light">
@@ -127,54 +130,122 @@ const ProductDetail = () => {
         {/* نموذج الطلب */}
         <div className="col-md-6">
           <h2 className="mb-3">{product.name}</h2>
-          <h4 className="text-primary mb-4">{product.price.toLocaleString()} دج</h4>
+
+          {/* 💰 عرض السعر بشكل جميل */}
+          <div className="d-flex align-items-end mb-4">
+            {hasPromotion && (
+              <span className="text-muted text-decoration-line-through me-3 fs-5">
+                {product.oldPrice.toLocaleString()} دج
+              </span>
+            )}
+            <span className="text-primary fw-bold fs-3">
+              {product.price.toLocaleString()} دج
+            </span>
+            {hasPromotion && (
+              <span className="badge bg-danger ms-3">عرض خاص 🔥</span>
+            )}
+          </div>
+
+          {/* 🚚 ملاحظة التوصيل */}
+          <div className="alert alert-success py-2 mb-4 text-center">
+            🚚 التوصيل متوفر في <strong>جميع ولايات الجزائر</strong>
+          </div>
+
           {message && <div className="alert alert-danger">{message}</div>}
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label className="form-label fw-bold">الاسم الكامل</label>
-              <input type="text" className="form-control shadow-sm"
-                value={fullName} onChange={(e) => setFullName(e.target.value)}
-                placeholder="ادخل اسمك الكامل" required />
+              <input
+                type="text"
+                className="form-control shadow-sm"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="ادخل اسمك الكامل"
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">الكمية</label>
               <div className="d-flex align-items-center">
-                <button type="button" className="btn btn-outline-secondary" onClick={decrementQuantity}>-</button>
-                <input type="text" className="form-control text-center mx-2"
-                  value={quantity} readOnly style={{ maxWidth: "80px" }} />
-                <button type="button" className="btn btn-outline-secondary" onClick={incrementQuantity}>+</button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={decrementQuantity}
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  className="form-control text-center mx-2"
+                  value={quantity}
+                  readOnly
+                  style={{ maxWidth: "80px" }}
+                />
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={incrementQuantity}
+                >
+                  +
+                </button>
               </div>
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">الولاية</label>
-              <select className="form-select shadow-sm"
-                value={wilaya} onChange={(e) => setWilaya(e.target.value)} required>
+              <select
+                className="form-select shadow-sm"
+                value={wilaya}
+                onChange={(e) => setWilaya(e.target.value)}
+                required
+              >
                 <option value="">اختر الولاية</option>
-                {wilayas.map((w, index) => (<option key={index} value={w}>{w}</option>))}
+                {wilayas.map((w, index) => (
+                  <option key={index} value={w}>
+                    {w}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">العنوان</label>
-              <input type="text" className="form-control shadow-sm"
-                value={adresse} onChange={(e) => setAdresse(e.target.value)} required />
+              <input
+                type="text"
+                className="form-control shadow-sm"
+                value={adresse}
+                onChange={(e) => setAdresse(e.target.value)}
+                required
+              />
             </div>
 
             <div className="mb-3">
               <label className="form-label fw-bold">رقم الهاتف</label>
-              <input type="text" className="form-control shadow-sm"
-                value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+              <input
+                type="text"
+                className="form-control shadow-sm"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+              />
             </div>
 
             <div className="mb-4">
               <label className="form-label fw-bold">المجموع الكلي (دج)</label>
-              <input type="number" className="form-control shadow-sm" value={totalPrice} readOnly />
+              <input
+                type="number"
+                className="form-control shadow-sm"
+                value={totalPrice}
+                readOnly
+              />
             </div>
 
-            <button type="submit" className="btn btn-success w-100 shadow-sm fw-bold">
+            <button
+              type="submit"
+              className="btn btn-success w-100 shadow-sm fw-bold"
+            >
               🛒 إرسال الطلب
             </button>
           </form>
