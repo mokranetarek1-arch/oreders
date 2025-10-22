@@ -46,8 +46,8 @@ const ProductDetail = () => {
     if (product) setTotalPrice(product.price * quantity);
   }, [quantity, product]);
 
-  const incrementQuantity = () => setQuantity(prev => prev + 1);
-  const decrementQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+  const incrementQuantity = () => setQuantity((prev) => prev + 1);
+  const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -97,7 +97,6 @@ const ProductDetail = () => {
   };
 
   const generatedOldPrice = Math.round(product.price * 1.2);
-  const discountPercentage = Math.round(((generatedOldPrice - product.price) / generatedOldPrice) * 100);
 
   return (
     <div className="product-detail-container container mt-5">
@@ -126,16 +125,15 @@ const ProductDetail = () => {
 
         {/* تفاصيل المنتج + الطلب */}
         <div className="col-md-6">
-          <h2 className="mb-3 fw-bold">{product.name}</h2>
+          <h2 className="mb-4 fw-bold text-dark">{product.name}</h2>
 
-          {/* 💰 قسم السعر الاحترافي */}
-          <div className="price-box mb-4">
-            <div className="d-flex align-items-end flex-wrap">
-              <span className="old-price me-3">{generatedOldPrice.toLocaleString()} دج</span>
+          {/* 💰 السعر والعرض */}
+          <div className="price-section mb-5">
+            <span className="old-price">{generatedOldPrice.toLocaleString()} دج</span>
+            <div className="new-price-line mt-1">
               <span className="new-price">{product.price.toLocaleString()} دج</span>
-              <span className="discount-badge ms-3">-{discountPercentage}%</span>
+              <span className="offer-tag">عرض خاص 🔥</span>
             </div>
-            <span className="special-offer-badge">🎉 عرض خاص لفترة محدودة</span>
           </div>
 
           <div className="alert alert-success py-2 mb-4 text-center">
@@ -210,8 +208,8 @@ const ProductDetail = () => {
               <input type="number" className="form-control shadow-sm" value={totalPrice} readOnly />
             </div>
 
-            <button type="submit" className="btn btn-success w-100 shadow-sm fw-bold">
-              🛒 إرسال الطلب
+            <button type="submit" className="btn btn-success w-100 shadow-sm fw-bold fs-5">
+              🛒 إرسال الطلب الآن
             </button>
           </form>
         </div>
