@@ -52,7 +52,7 @@ const ProductDetail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!fullName || !wilaya || !adresse || !phoneNumber) {
-      setMessage("الرجاء تعبئة جميع الحقول قبل إرسال الطلب!");
+      setMessage("⚠️ الرجاء تعبئة جميع الحقول قبل إرسال الطلب!");
       return;
     }
     try {
@@ -76,7 +76,7 @@ const ProductDetail = () => {
       setPhoneNumber("");
       setFullName("");
       setTotalPrice(0);
-      alert(`✅ شكرًا ${fullName} على شرائك ${product.name}! طلبك تم إرساله بنجاح.`);
+      alert(`✅ شكرًا ${fullName} على شرائك ${product.name}! تم إرسال طلبك بنجاح.`);
       setMessage("");
     } catch (error) {
       console.error(error);
@@ -100,9 +100,9 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-container container mt-5">
-      <div className="row shadow-lg p-4 rounded bg-light">
+      <div className="row shadow-lg p-4 rounded bg-white">
         {/* صور المنتج */}
-        <div className="col-md-6 mb-4 mb-md-0 text-center">
+        <div className="col-md-6 mb-4 text-center">
           <div className="product-slider-wrapper">
             {product.imageURLs?.length > 0 ? (
               <Slider {...sliderSettings}>
@@ -123,26 +123,24 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* تفاصيل المنتج + الطلب */}
+        {/* تفاصيل المنتج */}
         <div className="col-md-6">
-          <h2 className="mb-4 fw-bold text-dark">{product.name}</h2>
+          <h2 className="fw-bold text-dark mb-3">{product.name}</h2>
 
-          {/* 💰 السعر والعرض */}
-          <div className="price-section mb-5">
-            <span className="old-price">{generatedOldPrice.toLocaleString()} دج</span>
-            <div className="new-price-line mt-1">
-              <span className="new-price">{product.price.toLocaleString()} دج</span>
-              <span className="offer-tag">عرض خاص 🔥</span>
-            </div>
+          {/* 💰 السعر والعرض الاحترافي */}
+          <div className="price-box text-center mb-5">
+            <div className="old-price">{generatedOldPrice.toLocaleString()} دج</div>
+            <div className="new-price">{product.price.toLocaleString()} دج</div>
+            <div className="offer-badge">🔥 عرض خاص</div>
           </div>
 
-          <div className="alert alert-success py-2 mb-4 text-center">
+          <div className="alert alert-success py-2 mb-4 text-center fw-bold">
             🚚 التوصيل متوفر في <strong>جميع ولايات الجزائر</strong>
           </div>
 
           {message && <div className="alert alert-danger">{message}</div>}
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="order-form">
             <div className="mb-3">
               <label className="form-label fw-bold">الاسم الكامل</label>
               <input
@@ -190,6 +188,7 @@ const ProductDetail = () => {
                 className="form-control shadow-sm"
                 value={adresse}
                 onChange={(e) => setAdresse(e.target.value)}
+                placeholder="ادخل عنوانك الكامل"
               />
             </div>
 
@@ -200,6 +199,7 @@ const ProductDetail = () => {
                 className="form-control shadow-sm"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="ادخل رقم الهاتف"
               />
             </div>
 
