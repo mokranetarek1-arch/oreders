@@ -1,0 +1,100 @@
+﻿.pd-page {
+  min-height: calc(100vh - 84px);
+  background: #f4f8fc;
+}
+
+.pd-wrapper {
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid rgba(11, 40, 62, 0.11);
+  box-shadow: 0 16px 36px rgba(13, 31, 45, 0.1);
+  padding: 1rem;
+}
+
+.pd-slider-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #e9f1f8;
+}
+
+.pd-slide,
+.pd-single-image {
+  height: 380px;
+}
+
+.pd-slide img,
+.pd-single-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pd-description {
+  border: 1px solid rgba(11, 40, 62, 0.11);
+  border-radius: 12px;
+  background: #fbfdff;
+  padding: 0.9rem;
+}
+
+.pd-description h5 {
+  margin: 0 0 0.5rem;
+  color: #0f3047;
+}
+
+.pd-description p {
+  margin: 0;
+  color: #4d6274;
+}
+
+.pd-title {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f3047;
+}
+
+.pd-price-box {
+  margin: 1rem 0;
+  text-align: center;
+  border-radius: 14px;
+  padding: 1rem;
+  background: linear-gradient(145deg, #0f3047, #0e7a88);
+  color: #fff;
+}
+
+.pd-old-price {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.pd-new-price {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.pd-offer {
+  background: rgba(255, 255, 255, 0.16);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.pd-form .form-control,
+.pd-form .form-select {
+  border-radius: 12px;
+  border: 1px solid rgba(13, 31, 45, 0.16);
+}
+
+.pd-form .form-control:focus,
+.pd-form .form-select:focus {
+  border-color: #0e7a88;
+  box-shadow: 0 0 0 0.2rem rgba(14, 122, 136, 0.15);
+}
+
+.pd-submit-btn {
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #0e7a88, #0a5a64);
+  font-weight: 700;
+  padding: 0.72rem;
+}

@@ -1,0 +1,111 @@
+﻿.bc-page {
+  position: relative;
+  min-height: calc(100vh - 84px);
+  background: linear-gradient(140deg, #0b2236, #0e7a88 55%, #f4b942 130%);
+  color: #fff;
+  overflow: hidden;
+}
+
+.bc-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.18), transparent 35%),
+    radial-gradient(circle at 90% 75%, rgba(255, 255, 255, 0.16), transparent 35%);
+}
+
+.bc-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 5rem 1rem 3rem;
+}
+
+.bc-content h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+}
+
+.bc-content p {
+  max-width: 780px;
+  margin: 0 auto;
+  opacity: 0.94;
+  font-size: 1.1rem;
+}
+
+.bc-actions {
+  margin-top: 2.1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.bc-btn {
+  border: 0;
+  border-radius: 14px;
+  padding: 1rem 2rem;
+  font-size: 1.06rem;
+  font-weight: 800;
+  min-width: 210px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bc-btn:hover {
+  transform: translateY(-3px);
+}
+
+.bc-btn-customer {
+  background: #ffffff;
+  color: #0a3653;
+}
+
+.bc-btn-agency {
+  background: rgba(10, 26, 39, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.bc-truck-wrap {
+  margin-top: 2.6rem;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bc-truck {
+  position: absolute;
+  width: 180px;
+  filter: brightness(0) invert(1);
+  animation: drive 10s linear infinite;
+}
+
+.bc-truck.rtl {
+  animation: drive-rtl 10s linear infinite;
+}
+
+@keyframes drive {
+  0% { left: -190px; }
+  100% { left: 100%; }
+}
+
+@keyframes drive-rtl {
+  0% { right: -190px; }
+  100% { right: 100%; }
+}
+
+@media (max-width: 760px) {
+  .bc-btn {
+    width: 100%;
+  }
+
+  .bc-truck-wrap {
+    height: 110px;
+  }
+
+  .bc-truck {
+    width: 130px;
+  }
+}

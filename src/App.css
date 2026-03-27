@@ -1,0 +1,16 @@
+.app-main-shell {
+  min-height: 100vh;
+}
+
+@media (min-width: 992px) {
+  .app-main-shell {
+    margin-left: 92px;
+    width: calc(100% - 92px);
+    transition: margin-left 0.28s ease, width 0.28s ease;
+  }
+
+  body:has(.hd-navbar-side:hover) .app-main-shell {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+  }
+}
