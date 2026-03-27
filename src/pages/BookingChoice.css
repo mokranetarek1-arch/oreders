@@ -76,44 +76,8 @@
   color: #ffffff;
 }
 
-.bc-truck-wrap {
-  margin-top: 2.6rem;
-  height: 140px;
-  overflow: hidden;
-  position: relative;
-}
-
-.bc-truck {
-  position: absolute;
-  width: 180px;
-  filter: brightness(0) invert(1);
-  animation: drive 10s linear infinite;
-}
-
-.bc-truck.rtl {
-  animation: drive-rtl 10s linear infinite;
-}
-
-@keyframes drive {
-  0% { left: -190px; }
-  100% { left: 100%; }
-}
-
-@keyframes drive-rtl {
-  0% { right: -190px; }
-  100% { right: 100%; }
-}
-
 @media (max-width: 760px) {
   .bc-btn {
     width: 100%;
-  }
-
-  .bc-truck-wrap {
-    height: 110px;
-  }
-
-  .bc-truck {
-    width: 130px;
   }
 }

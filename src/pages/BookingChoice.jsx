@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import Seo from "../components/Seo";
-import towTruck from "../assets/tow-truck.png";
 import heroVideo from "../assets/video.mp4";
 import "./BookingChoice.css";
 
@@ -48,10 +47,6 @@ export default function BookingChoice() {
           <button className="bc-btn bc-btn-agency" onClick={() => navigate("/agency-login")}>
             {text.agency[language]}
           </button>
-        </div>
-
-        <div className="bc-truck-wrap">
-          <img src={towTruck} alt="Tow Truck" className={`bc-truck ${language === "AR" ? "rtl" : ""}`} />
         </div>
       </div>
     </section>
