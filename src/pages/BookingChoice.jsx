@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LanguageContext } from "../context/LanguageContext";
 import Seo from "../components/Seo";
 import towTruck from "../assets/tow-truck.png";
+import heroVideo from "../assets/video.mp4";
 import "./BookingChoice.css";
 
 export default function BookingChoice() {
@@ -32,6 +33,9 @@ export default function BookingChoice() {
         path="/booking-choice"
         keywords="reservation depannage auto, remorquage reservation, assistance routiere algerie"
       />
+      <video autoPlay loop muted playsInline className="bc-video">
+        <source src={heroVideo} type="video/mp4" />
+      </video>
       <div className="bc-overlay" />
       <div className="bc-content container">
         <h1>{text.title[language]}</h1>
